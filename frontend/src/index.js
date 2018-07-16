@@ -10,12 +10,13 @@ const store = createStore(
   reducer,
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );
-console.log(store.getState());
+// console.log(store.getState());
 
 ReactDOM.render(
-  <BrowserRouter>
-    <div>
-      <Route path="/" component={PostsList} />
-    </div>
-  </BrowserRouter>
+  // <BrowserRouter store={store} >
+  //   <div>
+  //     <Route path="/" component={PostsList} />
+  //   </div>
+  // </BrowserRouter>
+  <PostsList store={store} />
   , document.getElementById('root'));
