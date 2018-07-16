@@ -4,9 +4,17 @@ import {
 } from '../actions';
 import * as PostsAPI from '../utils/PostsAPI';
 
-let initialPostState = PostsAPI.getAll().then((posts) => {
-  return posts;
-});
+// let initialPostState = PostsAPI.getAll().then((posts) => {
+//   return posts;
+// });
+
+const initialPostState = {
+  author: 'KM',
+  body: 'this is the body',
+  category: 'react',
+  commentCount: '5',
+  title: 'The TITLE',
+};
 
 
 function post (state = initialPostState, action) {
