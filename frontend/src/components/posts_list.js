@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import * as PostsAPI from '../PostsAPI';
+import * as PostsAPI from '../utils/PostsAPI';
 
 class PostsList extends Component {
 
