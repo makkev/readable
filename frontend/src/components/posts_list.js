@@ -6,14 +6,31 @@ class PostsList extends Component {
   componentDidMount() {
     this.props.fetchPosts();
   }
+
+  renderPosts() {
+    return Object.values(this.props.posts).map(post => {
+      return (
+        <li key={post.id}>
+          {post.title}
+        </li>
+      )
+    });
+
+  }
   render() {
-    // console.log(this.state);
     return (
       <div>
-        Posts List
+       <h3>Posts</h3> 
+       <ul>
+        {this.renderPosts()}
+       </ul>
       </div>
     );
   }
 }
 
-export default connect(null, { fetchPosts })(PostsList);
+function mapStateToProps(state) {
+  return { posts: state.posts };
+}
+
+export default connect(mapStateToProps, { fetchPosts })(PostsList);

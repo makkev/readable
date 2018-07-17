@@ -5,7 +5,7 @@ import { BrowserRouter, Route } from 'react-router-dom';
 import PostsList from './components/posts_list';
 import { createStore, applyMiddleware, compose  }  from 'redux';
 import reducer from './reducers';
-import { Provider } from 'react-redux';
+import { Provider } from 'react-redux'
 import thunk from 'redux-thunk';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
