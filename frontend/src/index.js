@@ -3,20 +3,24 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import { BrowserRouter, Route } from 'react-router-dom';
 import PostsList from './components/posts_list';
-import { createStore }  from 'redux';
+import { createStore, applyMiddleware, compose  }  from 'redux';
 import reducer from './reducers';
+import { Provider } from 'react-redux';
+import thunk from 'redux-thunk';
 
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(
   reducer,
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+  composeEnhancers(applyMiddleware(thunk))
 );
 // console.log(store.getState());
 
 ReactDOM.render(
-  // <BrowserRouter store={store} >
-  //   <div>
-  //     <Route path="/" component={PostsList} />
-  //   </div>
-  // </BrowserRouter>
-  <PostsList store={store} />
+  <Provider store={store}>
+    <BrowserRouter>
+      <div>
+        <Route path="/" component={PostsList} />
+      </div>
+    </BrowserRouter>
+  </Provider>
   , document.getElementById('root'));

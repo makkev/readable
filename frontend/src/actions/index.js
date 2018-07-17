@@ -1,20 +1,13 @@
-export const ADD_POST = 'ADD_POST';
-export const DELETE_POST = 'DELETE_POST';
+import * as PostsAPI from '../utils/PostsAPI';
+export const RECEIVE_POSTS = 'RECEIVE_POSTS';
 
-export function addPost ({ author, body, category, commentCount, title }) {
-  return {
-    type: ADD_POST,
-    author,
-    body,
-    category,
-    commentCount,
-    title,
-  }
-}
+export const receivePosts = posts => ({
+  type: RECEIVE_POSTS,
+  posts,
+});
 
-export function deletePost ({ post }) {
-  return {
-    type: DELETE_POST,
-    post,
-  }
-}
+export const fetchPosts = () => dispatch => (
+  PostsAPI
+    .getAll()
+    .then(posts => dispatch(receivePosts(posts)))
+);
