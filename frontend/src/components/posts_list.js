@@ -11,9 +11,15 @@ class PostsList extends Component {
   renderPosts() {
     return Object.values(this.props.posts).map(post => {
       return (
-        <li key={post.id}>
-          {post.title}
-        </li>
+        <div key={post.id}>
+          <p>{post.title}</p>
+          <p>{post.author}</p>
+          <p>{post.body}</p>
+          <p>{post.category}</p>
+          <p>{post.voteScore}</p>
+          <p>{post.commentCount}</p>
+          <hr/>
+        </div>
       )
     });
 
@@ -22,10 +28,10 @@ class PostsList extends Component {
     return (
       <div>
       <Link to="/create">Create New</Link>
-       <h3>Posts</h3> 
-       <ul>
+       <h2>Posts</h2> 
+       <div>
         {this.renderPosts()}
-       </ul>
+       </div>
       </div>
     );
   }

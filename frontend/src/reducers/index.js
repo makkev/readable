@@ -1,5 +1,6 @@
 import { combineReducers } from 'redux';
 import { RECEIVE_POSTS } from '../actions';
+import { CREATE_POST } from '../actions';
 
 const arrayToObject = (array, keyField) =>
    array.reduce((obj, item) => {
@@ -11,6 +12,7 @@ function posts(state = {}, action) {
   switch (action.type) {
     case RECEIVE_POSTS:
       return arrayToObject(action.posts, 'id');
+    
 
     default:
       return state;
