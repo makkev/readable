@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import { BrowserRouter, Route } from 'react-router-dom';
 import PostsList from './components/posts_list';
+import PostsCreate from './components/posts_create';
 import { createStore, applyMiddleware, compose  }  from 'redux';
 import reducer from './reducers';
 import { Provider } from 'react-redux'
@@ -19,7 +20,8 @@ ReactDOM.render(
   <Provider store={store}>
     <BrowserRouter>
       <div>
-        <Route path="/" component={PostsList} />
+        <Route exact path="/" component={PostsList} />
+        <Route path="/create" component={PostsCreate} />
       </div>
     </BrowserRouter>
   </Provider>

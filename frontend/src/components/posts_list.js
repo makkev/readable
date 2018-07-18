@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { fetchPosts } from '../actions';
 
@@ -20,6 +21,7 @@ class PostsList extends Component {
   render() {
     return (
       <div>
+      <Link to="/create">Create New</Link>
        <h3>Posts</h3> 
        <ul>
         {this.renderPosts()}
