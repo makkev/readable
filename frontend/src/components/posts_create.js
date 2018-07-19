@@ -11,6 +11,7 @@ class PostsCreate extends Component {
       category: this._inputCategory.value,
     }
     this.props.addPost(thePost);
+    window.location.assign('/');
   }
   render() {
     return (
