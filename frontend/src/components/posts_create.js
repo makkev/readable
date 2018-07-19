@@ -1,32 +1,46 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { addPost } from '../actions';
+import { addPost, createPost } from '../actions';
 
 class PostsCreate extends Component {
-  render() {
-    // console.log(this.props);
+  createPost(e) {
     const thePost = {
-      title: 'test',
-      body: 'testbody',
-      author: 'makky',
-      category: 'react',
+      title: this._inputTitle.value,
+      body: this._inputBody.value,
+      author: this._inputAuthor.value,
+      category: this._inputCategory.value,
     }
     this.props.addPost(thePost);
+  }
+  render() {
     return (
       <div>
         <h3>Post Create</h3>
         <form>
-          <p>Title: <input type="text" placeholder="Title" /></p>
-          <p>Body: <input type="text" placeholder="Body" /></p>
-          <p>Author: <input type="text" placeholder="Author" /></p>
+          <p>
+            Title: 
+            <input  ref={(a) => this._inputTitle = a}
+              type="text" placeholder="Title" />
+          </p>
+          <p>
+            Body: 
+            <input ref={(a) => this._inputBody = a}
+              type="text" placeholder="Body" />
+          </p>
+          <p>
+            Author: 
+            <input ref={(a) => this._inputAuthor = a}
+              type="text" placeholder="Author" />
+          </p>
           <p>
             Category: 
-            <select name="category" id="category">
+            <select ref={(a) => this._inputCategory = a} name="category" id="category">
               <option value="react">react</option>
               <option value="redux">redux</option>
               <option value="udactiy">udacity</option>
             </select>
           </p>
+          <button type="button" onClick={(a) => this.createPost()}>add</button>
 
         </form>
       </div>

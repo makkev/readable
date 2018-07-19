@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { fetchPosts } from '../actions';
+import { fetchPosts, addPost } from '../actions';
 
 class PostsList extends Component {
   componentDidMount() {
@@ -41,4 +41,4 @@ function mapStateToProps(state) {
   return { posts: state.posts };
 }
 
-export default connect(mapStateToProps, { fetchPosts })(PostsList);
+export default connect(mapStateToProps, { fetchPosts, addPost })(PostsList);
