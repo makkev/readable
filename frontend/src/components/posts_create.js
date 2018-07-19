@@ -15,7 +15,7 @@ class PostsCreate extends Component {
   }
   render() {
     return (
-      <div>
+      <div className="postListMain">
         <h3>Post Create</h3>
         <form>
           <p>
