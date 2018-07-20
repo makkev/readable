@@ -2,13 +2,19 @@ import { combineReducers } from 'redux';
 import { 
   RECEIVE_POST,
   RECEIVE_ONE_POST,
-  UPDATE_POST_VOTE } from '../actions';
+  UPDATE_POST_VOTE, 
+  DELETE_POST} from '../actions';
 
 const arrayToObject = (array, keyField) =>
    array.reduce((obj, item) => {
      obj[item[keyField]] = item
      return obj
    }, {})
+
+const objectMinusRecDeleted = (object, key) => {
+  const { [key]: deletedObject, ...otherObjects } = object;
+  return otherObjects;
+}
 
 function post(state = {}, action) {
   switch (action.type) {
@@ -19,11 +25,10 @@ function post(state = {}, action) {
     case UPDATE_POST_VOTE:
       return { 
         ...state,
-        [action.vote.id]: action.vote, 
+        [action.post.id]: action.post, 
       };
-    
-
-    
+    case DELETE_POST:
+      return objectMinusRecDeleted(state, action.post.id);
 
     default:
       return state;

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { fetchPost, addPost, postVote,  } from '../actions';
+import { fetchPost, addPost, postVote, removePost } from '../actions';
 import '../readable.css';
 
 const UPVOTE  = 'upVote';
@@ -29,13 +29,13 @@ class PostsList extends Component {
               <p>{post.title}</p>
             </div>
             <p>by {post.author}</p>
-            <p>[Category: {post.category}] [Vote Score: {post.voteScore}] [Comments: {post.commentCount}] </p>
+            <p>[Category: {post.category}] [Comments: {post.commentCount}] </p>
             <p>{post.body}</p>
 
             <div className="container">
               <button className="buttons"
                 onClick={() => this.downVote(post.id)}>-</button>
-              <span>{post.voteScore}</span>
+              <span>Votes: {post.voteScore}</span>
               <button className="buttons"
                  onClick={() => this.upVote(post.id)}>+</button>
             </div>    
@@ -43,6 +43,7 @@ class PostsList extends Component {
             <Link to={`/edit/${post.id}`}>
               Edit Post
             </Link>
+            <button onClick={() => this.props.removePost(post.id)}>Delete</button>
           </li>
       </div>
       )
@@ -69,5 +70,5 @@ function mapStateToProps(state) {
 }
 
 export default connect(mapStateToProps,
-  { fetchPost, addPost, postVote,  }
+  { fetchPost, addPost, postVote, removePost }
 )(PostsList);
