@@ -33,3 +33,12 @@
   width: 165px;
   margin-left: 10px;
 }
+
+.postListMain select {
+  padding: 10px;
+  font-size: 16px;
+  border: 2px solid #FFF;
+  height: 45px;
+  width: 165px;
+  margin-left: 10px;
+}

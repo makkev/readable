@@ -1,6 +1,7 @@
 import { combineReducers } from 'redux';
-import { RECEIVE_POSTS } from '../actions';
-import { CREATE_POST } from '../actions';
+import { 
+  RECEIVE_POST,
+  RECEIVE_ONE_POST, } from '../actions';
 
 const arrayToObject = (array, keyField) =>
    array.reduce((obj, item) => {
@@ -8,10 +9,13 @@ const arrayToObject = (array, keyField) =>
      return obj
    }, {})
 
-function posts(state = {}, action) {
+function post(state = {}, action) {
   switch (action.type) {
-    case RECEIVE_POSTS:
-      return arrayToObject(action.posts, 'id');
+    case RECEIVE_POST:
+      return arrayToObject(action.post, 'id');
+    case RECEIVE_ONE_POST:
+      return action.post;
+
     
 
     default:
@@ -20,5 +24,5 @@ function posts(state = {}, action) {
 }
 
 export default combineReducers({
- posts, 
+ post, 
 });

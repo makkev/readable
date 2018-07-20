@@ -1,23 +1,26 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { fetchPosts, addPost } from '../actions';
+import { fetchPost, addPost } from '../actions';
 import '../readable.css';
 
 class PostsList extends Component {
   componentDidMount() {
-    this.props.fetchPosts();
+    this.props.fetchPost();
   }
 
-  renderPosts() {
-    return Object.values(this.props.posts).map(post => {
+  renderPost() {
+    return Object.values(this.props.post).map(post => {
       return (
         <div key={post.id}>
-          <li>
+          <li key={post.id}>
             <p>{post.title}</p>
             <p>by {post.author}</p>
             <p>[Category: {post.category}] [Vote Score: {post.voteScore}] [Comments: {post.commentCount}] </p>
             <p>{post.body}</p>
+            <Link to={`/edit/${post.id}`}>
+              Edit Post
+            </Link>
           </li>
       </div>
       )
@@ -32,7 +35,7 @@ class PostsList extends Component {
           <Link to="/create">Create New</Link>
         </div>
         <ul className="theList">
-          {this.renderPosts()}
+          {this.renderPost()}
         </ul>
         </div>
     );
@@ -40,7 +43,7 @@ class PostsList extends Component {
 }
 
 function mapStateToProps(state) {
-  return { posts: state.posts };
+  return { post: state.post };
 }
 
-export default connect(mapStateToProps, { fetchPosts, addPost })(PostsList);
+export default connect(mapStateToProps, { fetchPost, addPost })(PostsList);
