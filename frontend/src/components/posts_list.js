@@ -1,12 +1,23 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { fetchPost, addPost } from '../actions';
+import { fetchPost, addPost, postVote,  } from '../actions';
 import '../readable.css';
+
+const UPVOTE  = 'upVote';
+const DOWNVOTE  = 'downVote';
 
 class PostsList extends Component {
   componentDidMount() {
     this.props.fetchPost();
+  }
+
+  upVote(id) {
+    this.props.postVote(id, { option: UPVOTE });
+  }
+
+  downVote(id) {
+    this.props.postVote(id, { option: DOWNVOTE });
   }
 
   renderPost() {
@@ -14,10 +25,21 @@ class PostsList extends Component {
       return (
         <div key={post.id}>
           <li key={post.id}>
-            <p>{post.title}</p>
+            <div className="title">
+              <p>{post.title}</p>
+            </div>
             <p>by {post.author}</p>
             <p>[Category: {post.category}] [Vote Score: {post.voteScore}] [Comments: {post.commentCount}] </p>
             <p>{post.body}</p>
+
+            <div className="container">
+              <button className="buttons"
+                onClick={() => this.downVote(post.id)}>-</button>
+              <span>{post.voteScore}</span>
+              <button className="buttons"
+                 onClick={() => this.upVote(post.id)}>+</button>
+            </div>    
+
             <Link to={`/edit/${post.id}`}>
               Edit Post
             </Link>
@@ -46,4 +68,6 @@ function mapStateToProps(state) {
   return { post: state.post };
 }
 
-export default connect(mapStateToProps, { fetchPost, addPost })(PostsList);
+export default connect(mapStateToProps,
+  { fetchPost, addPost, postVote,  }
+)(PostsList);

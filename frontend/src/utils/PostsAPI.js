@@ -15,30 +15,38 @@ const headers = {
 export const getAll = () =>
   fetch(`${api}/posts`, { headers })
     .then(res => res.json());
-    // .then(data => data.posts)
 
 export const getPost = (id) =>
   fetch(`${api}/posts/${id}`, { headers })
     .then(res => res.json());
-    // .then(data => data.posts)
 
 
 export const addPost = (post) =>
-fetch(`${api}/posts`, {
-  method: 'POST',
-  headers: {
-    ...headers,
-    'Content-Type': 'application/json'
-  },
-  body: JSON.stringify(post)
-}).then(res => res.json())
+  fetch(`${api}/posts`, {
+    method: 'POST',
+    headers: {
+      ...headers,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(post)
+  }).then(res => res.json());
 
 export const editPost = (id, post) =>
-fetch(`${api}/posts/${id}`, {
-  method: 'PUT',
-  headers: {
-    ...headers,
-    'Content-Type': 'application/json'
-  },
-  body: JSON.stringify(post)
-}).then(res => res.json())
+  fetch(`${api}/posts/${id}`, {
+    method: 'PUT',
+    headers: {
+      ...headers,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(post)
+  }).then(res => res.json());
+
+export const postVote = (id, option) =>
+  fetch(`${api}/posts/${id}`, {
+    method: 'POST',
+    headers: {
+      ...headers,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(option)
+  }).then(res => res.json());

@@ -3,6 +3,7 @@ export const RECEIVE_POST = 'RECEIVE_POST';
 export const RECEIVE_ONE_POST = 'RECEIVE_ONE_POST';
 export const CREATE_POST = 'CREATE_POST';
 export const UPDATE_POST = 'UPDATE_POST';
+export const UPDATE_POST_VOTE = 'UPDATE_POST_VOTE';
 
 function guid() {
   function s4() {
@@ -73,5 +74,19 @@ export const editPost = (val) => {
     PostsAPI
       .editPost(id, post)
       .then(post => dispatch(updatePost(post)))
+  );
+}
+
+export const updatePostVote = (id, vote) => ({
+  type: UPDATE_POST_VOTE,
+  id,
+  vote,
+});
+
+export const postVote = (id, vote) => {
+  return dispatch => (
+    PostsAPI
+      .postVote(id, vote)
+      .then(vote => dispatch(updatePostVote(id, vote)))
   );
 }

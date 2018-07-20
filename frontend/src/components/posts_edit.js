@@ -13,12 +13,10 @@ class PostsEdit extends Component {
       title: this._inputTitle.value,
       body: this._inputBody.value,
     }
-    console.log(thePost);
     this.props.editPost(thePost);
     window.location.assign('/');
   }
   render() {
-    console.log(this.props.post);
     return (
       <div className="postListMain">
         <h3>Edit Post</h3>
