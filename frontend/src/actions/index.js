@@ -4,7 +4,9 @@ export const RECEIVE_ONE_POST = 'RECEIVE_ONE_POST';
 export const CREATE_POST = 'CREATE_POST';
 export const UPDATE_POST = 'UPDATE_POST';
 export const UPDATE_POST_VOTE = 'UPDATE_POST_VOTE';
+export const UPDATE_POST_VOTE_DETAIL = 'UPDATE_POST_VOTE_DETAIL';
 export const DELETE_POST = 'DELETE_POST';
+export const RECEIVE_COMMENTS = 'RECEIVE_COMMENTS';
 
 
 function guid() {
@@ -92,6 +94,19 @@ export const postVote = (id, vote) => {
   );
 }
 
+export const updatePostVoteDetail = post => ({
+  type: UPDATE_POST_VOTE_DETAIL,
+  post,
+});
+
+export const postVoteDetail = (id, vote) => {
+  return dispatch => (
+    PostsAPI
+      .postVote(id, vote)
+      .then(post => dispatch(updatePostVoteDetail(post)))
+  );
+}
+
 export const deletePost = (post) => ({
   type: DELETE_POST,
   post,
@@ -102,3 +117,14 @@ export const removePost = (id) =>
     PostsAPI
       .deletePost(id)
       .then(post => dispatch(deletePost(post)));
+
+export const receiveComments = (comments) => ({
+  type: RECEIVE_COMMENTS,
+  comments,
+});
+
+export const listComments = (id) =>
+  dispatch => 
+    PostsAPI
+      .listComments(id)
+      .then(comments => dispatch(receiveComments(comments)));

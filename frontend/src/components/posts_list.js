@@ -26,11 +26,14 @@ class PostsList extends Component {
         <div key={post.id}>
           <li key={post.id}>
             <div className="title">
-              <p>{post.title}</p>
+              <p>
+                <Link to={`/detail/${post.id}`}>
+                  {post.title}
+                </Link>
+              </p>
             </div>
             <p>by {post.author}</p>
             <p>[Category: {post.category}] [Comments: {post.commentCount}] </p>
-            <p>{post.body}</p>
 
             <div className="container">
               <button className="buttons"
@@ -60,7 +63,7 @@ class PostsList extends Component {
         <ul className="theList">
           {this.renderPost()}
         </ul>
-        </div>
+      </div>
     );
   }
 }

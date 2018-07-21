@@ -3,7 +3,10 @@ import {
   RECEIVE_POST,
   RECEIVE_ONE_POST,
   UPDATE_POST_VOTE, 
-  DELETE_POST} from '../actions';
+  UPDATE_POST_VOTE_DETAIL, 
+  DELETE_POST,
+  RECEIVE_COMMENTS,
+  } from '../actions';
 
 const arrayToObject = (array, keyField) =>
    array.reduce((obj, item) => {
@@ -27,14 +30,29 @@ function post(state = {}, action) {
         ...state,
         [action.post.id]: action.post, 
       };
+    case UPDATE_POST_VOTE_DETAIL:
+      return { ...action.post };
     case DELETE_POST:
       return objectMinusRecDeleted(state, action.post.id);
-
+ 
     default:
       return state;
   }
 }
 
+function comment(state = {}, action) {
+  switch(action.type) {
+    case RECEIVE_COMMENTS:
+      const theObj = arrayToObject(action.comments, 'id');
+      return theObj;
+
+    default:
+      return state;
+  }
+
+}
+
 export default combineReducers({
  post, 
+ comment,
 });

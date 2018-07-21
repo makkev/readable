@@ -59,7 +59,15 @@ export const deletePost = (id) => {
       'Content-Type': 'application/json'
     },
   }).then(res => res.json());
-  console.log(result);
   return result;
 
 }
+
+export const listComments = (id) =>
+  fetch(`${api}/posts/${id}/comments`, {
+    method: 'GET',
+    headers: {
+      ...headers,
+      'Content-Type': 'application/json'
+    },
+  }).then(res => res.json());

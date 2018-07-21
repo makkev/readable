@@ -5,6 +5,7 @@ import { BrowserRouter, Route } from 'react-router-dom';
 import PostsList from './components/posts_list';
 import PostsCreate from './components/posts_create';
 import PostsEdit from './components/posts_edit';
+import PostsDetail from './components/posts_detail';
 import { createStore, applyMiddleware, compose  }  from 'redux';
 import reducer from './reducers';
 import { Provider } from 'react-redux'
@@ -25,6 +26,7 @@ ReactDOM.render(
         <Route exact path="/" component={PostsList} />
         <Route path="/create" component={PostsCreate} />
         <Route path="/edit/:id" component={PostsEdit} />
+        <Route path="/detail/:id" component={PostsDetail} />
 
       </div>
     </BrowserRouter>
