@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 // import Comments from './comments';
-import { getPost, editPost, postVoteDetail, listComments, postComment, removeComment } from '../actions';
+import { getPost, editPost, postVoteDetail, listComments, postComment, removeComment, editComment } from '../actions';
 
 const UPVOTE = 'upVote';
 const DOWNVOTE = 'downVote';
@@ -73,6 +73,7 @@ class PostsDetail extends Component {
           <Comments 
             comments={this.props.comment}
             removeComment={this.props.removeComment}
+            editComment={this.props.editComment}
           />
 
 
@@ -81,21 +82,46 @@ class PostsDetail extends Component {
   };
 }
 
-function Comments(props) {
-  return (
-    <div className="postListMain">
-      <ul className="theList">
-        {Object.values(props.comments).map(comment => (
-          <li key={comment.id}>
-            <div>{comment.body}</div>
-            <div>{comment.author}</div>
-            <div>{comment.voteScore}</div>
-            <button onClick={() => props.removeComment(comment.id)}>Delete</button>
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
+class Comments extends Component {
+  state = {
+    currentEditId: null,
+  }
+
+  setEditingId = (val) => this.setState({ currentEditId: val })
+
+  saveComment = (id, comment) => {
+    this.props.editComment(id, comment);
+    this.setEditingId(null);
+  }
+
+  render() {
+    return (
+      <div className="postListMain">
+        <ul className="theList">
+          {Object.values(this.props.comments).map(comment => (
+            <li key={comment.id}>
+              {comment.id == this.state.currentEditId ? 
+                <div>
+                  <p><input type="text" ref={(a) => this.body = a} defaultValue={comment.body} autoFocus /></p>
+                  <div>by {comment.author}</div>
+                  <button onClick={() => this.saveComment(comment.id, this.body.value)} >Save</button>
+                  <button onClick={() => this.setEditingId(null)} >Cancel</button>
+                </div>
+                :
+                <div>
+                  <div>{comment.body}</div>
+                  <div>by {comment.author}</div>
+                  <div>{comment.voteScore}</div>
+                  <button onClick={() => this.props.removeComment(comment.id)} class="button-delete">Delete</button>
+                  <button onClick={() => this.setEditingId(comment.id)} >Edit</button>
+                </div>
+              }
+            </li>
+          ))}
+        </ul>
+      </div>
+    );
+  }
 }
 
 class NewComment extends Component {
@@ -142,5 +168,5 @@ function mapStateToProps(state) {
 }
 
 export default connect(mapStateToProps,
-  { getPost, editPost, postVoteDetail, listComments, postComment, removeComment })(PostsDetail);
+  { getPost, editPost, postVoteDetail, listComments, postComment, removeComment, editComment  })(PostsDetail);
 

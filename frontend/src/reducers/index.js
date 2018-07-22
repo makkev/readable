@@ -7,7 +7,8 @@ import {
   DELETE_POST,
   RECEIVE_COMMENTS,
   ADD_COMMENT,
-  DELETE_COMMENT
+  DELETE_COMMENT,
+  UPDATE_COMMENT,
   } from '../actions';
 
 const arrayToObject = (array, keyField) =>
@@ -54,6 +55,12 @@ function comment(state = {}, action) {
       };
     case DELETE_COMMENT:
       return objectMinusRecDeleted(state, action.comment.id);
+    case UPDATE_COMMENT:
+      console.log(action.comment);
+      return {
+        ...state,
+        [action.comment.id]: action.comment,
+      };
 
     default:
       return state;
