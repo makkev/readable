@@ -16,7 +16,7 @@ class PostsCreate extends Component {
   render() {
     return (
       <div className="postListMain">
-        <h3>Post Create</h3>
+        <div className="page-head">Post Create</div>
         <form>
           <p>
             <div>Title</div>
@@ -40,7 +40,8 @@ class PostsCreate extends Component {
               </select>
             </div>
           </p>
-          <button type="button" onClick={(a) => this.createPost()}>add</button>
+          <button type="button" onClick={(a) => this.createPost()}>Save</button>
+          <button type="button" onClick={(a) => window.location.assign('/')}>Cancel</button>
 
         </form>
       </div>

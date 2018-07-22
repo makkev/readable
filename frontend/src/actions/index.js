@@ -10,6 +10,7 @@ export const RECEIVE_COMMENTS = 'RECEIVE_COMMENTS';
 export const ADD_COMMENT = 'ADD_COMMENT';
 export const DELETE_COMMENT = 'DELETE_COMMENT';
 export const UPDATE_COMMENT = 'UPDATE_COMMENT';
+export const UPDATE_COMMENT_VOTE = 'UPDATE_COMMENT_VOTE';
 
 
 
@@ -174,5 +175,16 @@ export const editComment = (id, comment) =>
     PostsAPI
       .updateComment(id, {timestamp: guid(), body: comment })
       .then(comment => dispatch(updateComment(comment)));
+
+export const updateCommentVote = (comment) => ({
+  type: UPDATE_COMMENT_VOTE,
+  comment,
+});
+
+export const voteComment = (id, vote) =>
+  dispatch => 
+    PostsAPI
+      .updateCommentVote(id, vote)
+      .then(comment => dispatch(updateCommentVote(comment)));
 
  

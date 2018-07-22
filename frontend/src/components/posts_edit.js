@@ -22,11 +22,13 @@ class PostsEdit extends Component {
         <h3>Edit Post</h3>
         <form>
           <p>
-            Title: 
-            <input key={this.props.post.id}
-              ref={(a) => this._inputTitle = a}
-              type="text" placeholder="Title" 
-              defaultValue={this.props.post.title} />
+            <div>Title:</div>
+            <div>
+              <input key={this.props.post.id}
+                ref={(a) => this._inputTitle = a}
+                type="text" placeholder="Title" 
+                defaultValue={this.props.post.title} />
+              </div>
           </p>
           <p>
             <div>Body:</div>

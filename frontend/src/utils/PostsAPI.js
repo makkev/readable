@@ -100,5 +100,16 @@ export const updateComment = (id, comment) => {
     },
     body: JSON.stringify(comment)
   }).then(res => res.json());
+}
+
+export const updateCommentVote = (id, vote) => {
+  return fetch(`${api}/comments/${id}`, {
+    method: 'POST',
+    headers: {
+      ...headers,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(vote)
+  }).then(res => res.json());
 
 }

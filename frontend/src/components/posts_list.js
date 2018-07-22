@@ -26,27 +26,27 @@ class PostsList extends Component {
         <div key={post.id}>
           <li key={post.id}>
             <div className="title">
-              <p>
+              <div>
                 <Link to={`/detail/${post.id}`}>
                   {post.title}
                 </Link>
-              </p>
+              </div>
             </div>
-            <p>by {post.author}</p>
-            <p>[Category: {post.category}] [Comments: {post.commentCount}] </p>
+            <div>by {post.author}</div>
+            <div>[Category: {post.category}] [Comments: {post.commentCount}] </div>
 
             <div className="container">
-              <button className="buttons"
+              <button className="button-vote"
                 onClick={() => this.downVote(post.id)}>-</button>
               <span>Votes: {post.voteScore}</span>
-              <button className="buttons"
+              <button className="button-vote"
                  onClick={() => this.upVote(post.id)}>+</button>
             </div>    
 
             <Link to={`/edit/${post.id}`}>
               Edit Post
             </Link>
-            <button onClick={() => this.props.removePost(post.id)}>Delete</button>
+            <button onClick={() => this.props.removePost(post.id)}>Delete Post</button>
           </li>
       </div>
       )
@@ -57,8 +57,8 @@ class PostsList extends Component {
     return (
       <div className="postListMain">
         <div className="header">
-          <h2>Posts</h2> 
-          <Link to="/create">Create New</Link>
+          <div className="page-head">Post List</div> 
+          <p><Link to="/create">Create New Post</Link></p>
         </div>
         <ul className="theList">
           {this.renderPost()}

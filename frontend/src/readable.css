@@ -69,7 +69,9 @@
 }
 
 .container {
-  background-color: #eee8d5;
+  padding: 1px;
+  /* background-color: #eee8d5; */
+  /* background-color: #FFF; */
   color: #859900;
   margin: 10px;
   padding: 5px;
@@ -78,5 +80,32 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 30px;
+  height: 15px;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.postListMain .button-vote {
+  padding: 10px;
+  font-size: 15px;
+  margin: 0px;
+  margin-right: 0px;
+  background-color: #268bd2;
+  color: #FFF;
+  border: 2px solid #268bd2;
+  height: 20px;
+  line-height: 0.05;
+}
+
+.postListMain .button-vote:hover {
+  background-color: #6c71c4;
+  border: 2px solid #6c71c4;
+  cursor: pointer;
+
+}
+
+.postListMain .page-head {
+  font-size: 25px;
+  color: #586e75;
+
 }

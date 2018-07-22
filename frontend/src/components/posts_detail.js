@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 // import Comments from './comments';
-import { getPost, editPost, postVoteDetail, listComments, postComment, removeComment, editComment } from '../actions';
+import { getPost, editPost, postVoteDetail, listComments,
+  postComment, removeComment, editComment, voteComment } from '../actions';
 
 const UPVOTE = 'upVote';
 const DOWNVOTE = 'downVote';
@@ -47,34 +48,38 @@ class PostsDetail extends Component {
   render() {
     return (
       <div className="postListMain">
-        <h3>Post Details</h3>
-          <div className="title">
-            <p>{this.props.post.title}</p>
-          </div>
-          <p>by {this.props.post.author}</p>
-          <p>[Category: {this.props.post.category}] [Comments: {this.props.post.commentCount}] </p>
-          <p>{this.props.post.body}</p>
-          <div className="container">
-            <button className="buttons"
-              onClick={() => this.downVote(this.props.post.id)}>-</button>
-            <span>Votes: {this.props.post.voteScore}</span>
-            <button className="buttons"
-                onClick={() => this.upVote(this.props.post.id)}>+</button>
-          </div>
-          <button className="buttons" onClick={(a) => this.renderNewComment() }>Add Comments</button>
+        <div className="page-head">Post Details</div>
+        <hr/>
+        <div className="title">
+          <p>{this.props.post.title}</p>
+        </div>
+        <p>by {this.props.post.author}</p>
+        <p>[Category: {this.props.post.category}] [Comments: {this.props.post.commentCount}] </p>
+        <p>{this.props.post.body}</p>
+        <div className="container">
+          <button className="button-vote"
+            onClick={() => this.downVote(this.props.post.id)}>-</button>
+          <span>Votes: {this.props.post.voteScore}</span>
+          <button className="button-vote"
+              onClick={() => this.upVote(this.props.post.id)}>+</button>
+        </div>
+        <br/>
+        <p><div className="page-head">Comments</div></p>
+        <hr/>
+        <button className="buttons" onClick={(a) => this.renderNewComment() }>Add Comments</button>
 
-          {this.state.showNewComment ? 
-            <NewComment 
-              unrenderNewComment={this.unrenderNewComment} 
-              postComment={this.props.postComment}
-              postId={this.props.post.id}
-            /> : null}
-
-          <Comments 
-            comments={this.props.comment}
-            removeComment={this.props.removeComment}
-            editComment={this.props.editComment}
-          />
+        {this.state.showNewComment ? 
+          <NewComment 
+            unrenderNewComment={this.unrenderNewComment} 
+            postComment={this.props.postComment}
+            postId={this.props.post.id}
+          /> : null}
+        <Comments 
+          comments={this.props.comment}
+          removeComment={this.props.removeComment}
+          editComment={this.props.editComment}
+          voteComment={this.props.voteComment}
+        />
 
 
       </div>
@@ -111,7 +116,17 @@ class Comments extends Component {
                 <div>
                   <div>{comment.body}</div>
                   <div>by {comment.author}</div>
-                  <div>{comment.voteScore}</div>
+                  <div className="container">
+                    <button className="button-vote"
+                      onClick={() => this.props.voteComment(comment.id, { option: 'downVote' })}>
+                      -
+                    </button>
+                    <span>Votes: {comment.voteScore}</span>
+                    <button className="button-vote"
+                      onClick={() => this.props.voteComment(comment.id, { option: 'upVote' })}>
+                      +
+                    </button>
+                  </div>
                   <button onClick={() => this.props.removeComment(comment.id)} class="button-delete">Delete</button>
                   <button onClick={() => this.setEditingId(comment.id)} >Edit</button>
                 </div>
@@ -168,5 +183,6 @@ function mapStateToProps(state) {
 }
 
 export default connect(mapStateToProps,
-  { getPost, editPost, postVoteDetail, listComments, postComment, removeComment, editComment  })(PostsDetail);
+  { getPost, editPost, postVoteDetail, listComments,
+    postComment, removeComment, editComment, voteComment  })(PostsDetail);
 

@@ -9,6 +9,7 @@ import {
   ADD_COMMENT,
   DELETE_COMMENT,
   UPDATE_COMMENT,
+  UPDATE_COMMENT_VOTE,
   } from '../actions';
 
 const arrayToObject = (array, keyField) =>
@@ -56,10 +57,14 @@ function comment(state = {}, action) {
     case DELETE_COMMENT:
       return objectMinusRecDeleted(state, action.comment.id);
     case UPDATE_COMMENT:
-      console.log(action.comment);
       return {
         ...state,
         [action.comment.id]: action.comment,
+      };
+    case UPDATE_COMMENT_VOTE:
+      return { 
+        ...state,
+        [action.comment.id]: action.comment, 
       };
 
     default:
