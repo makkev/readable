@@ -6,6 +6,8 @@ import {
   UPDATE_POST_VOTE_DETAIL, 
   DELETE_POST,
   RECEIVE_COMMENTS,
+  ADD_COMMENT,
+  DELETE_COMMENT
   } from '../actions';
 
 const arrayToObject = (array, keyField) =>
@@ -34,6 +36,7 @@ function post(state = {}, action) {
       return { ...action.post };
     case DELETE_POST:
       return objectMinusRecDeleted(state, action.post.id);
+
  
     default:
       return state;
@@ -43,8 +46,14 @@ function post(state = {}, action) {
 function comment(state = {}, action) {
   switch(action.type) {
     case RECEIVE_COMMENTS:
-      const theObj = arrayToObject(action.comments, 'id');
-      return theObj;
+      return arrayToObject(action.comments, 'id');
+    case ADD_COMMENT:
+      return {
+        ...state,
+        [action.comment.id]: action.comment,
+      };
+    case DELETE_COMMENT:
+      return objectMinusRecDeleted(state, action.comment.id);
 
     default:
       return state;

@@ -19,27 +19,26 @@ class PostsCreate extends Component {
         <h3>Post Create</h3>
         <form>
           <p>
-            Title: 
-            <input  ref={(a) => this._inputTitle = a}
-              type="text" placeholder="Title" />
+            <div>Title</div>
+            <div><input ref={(a) => this._inputTitle = a} type="text" placeholder="Title" /></div>
           </p>
           <p>
-            Body: 
-            <input ref={(a) => this._inputBody = a}
-              type="text" placeholder="Body" />
+            <div>Body:</div>
+            <div><textarea ref={(a) => this._inputBody = a} name="Text1" cols="40" rows="5" placeholder="Body"></textarea></div>
           </p>
           <p>
-            Author: 
-            <input ref={(a) => this._inputAuthor = a}
-              type="text" placeholder="Author" />
+            <div>Author:</div>
+            <div><input ref={(a) => this._inputAuthor = a} type="text" placeholder="Author" /></div>
           </p>
           <p>
-            Category: 
-            <select ref={(a) => this._inputCategory = a} name="category" id="category">
-              <option value="react">react</option>
-              <option value="redux">redux</option>
-              <option value="udactiy">udacity</option>
-            </select>
+            <div> Category:</div>
+            <div>
+              <select ref={(a) => this._inputCategory = a} name="category" id="category">
+                <option value="react">react</option>
+                <option value="redux">redux</option>
+                <option value="udactiy">udacity</option>
+              </select>
+            </div>
           </p>
           <button type="button" onClick={(a) => this.createPost()}>add</button>
 

@@ -7,6 +7,9 @@ export const UPDATE_POST_VOTE = 'UPDATE_POST_VOTE';
 export const UPDATE_POST_VOTE_DETAIL = 'UPDATE_POST_VOTE_DETAIL';
 export const DELETE_POST = 'DELETE_POST';
 export const RECEIVE_COMMENTS = 'RECEIVE_COMMENTS';
+export const ADD_COMMENT = 'ADD_COMMENT';
+export const DELETE_COMMENT = 'DELETE_COMMENT';
+
 
 
 function guid() {
@@ -128,3 +131,36 @@ export const listComments = (id) =>
     PostsAPI
       .listComments(id)
       .then(comments => dispatch(receiveComments(comments)));
+
+export const addComment = (comment) => ({
+  type: ADD_COMMENT,
+  comment,
+});
+
+export const postComment = (comment) => {
+  const { body, author, parentId, } = comment;
+  const newComment = {
+    id: guid(),
+    timestamp: Date.now(),
+    body,
+    author,
+    parentId,
+  }
+  return dispatch => 
+    PostsAPI
+      .postComment(newComment)
+      .then(comment => dispatch(addComment(comment)));
+}
+
+export const deleteComment = (comment) => ({
+  type: DELETE_COMMENT,
+  comment,
+});
+
+export const removeComment = (id) =>
+  dispatch => 
+    PostsAPI
+      .deleteComment(id)
+      .then(comment => dispatch(deleteComment(comment)));
+
+ 

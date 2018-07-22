@@ -29,12 +29,18 @@ class PostsEdit extends Component {
               defaultValue={this.props.post.title} />
           </p>
           <p>
-            Body: 
-            <input key={this.props.post.id}
-              ref={(a) => this._inputBody = a}
-              type="text" placeholder="Body"
-              defaultValue={this.props.post.body} />
+            <div>Body:</div>
+            <div>
+              <textarea key={this.props.post.id}
+                defaultValue={this.props.post.body} 
+                ref={(a) => this._inputBody = a}
+                name="Text1" cols="40"
+                rows="5"
+                placeholder="Body">
+              </textarea>
+            </div>
           </p>
+
           <p>
             Author: {this.props.post.author}
           </p>
@@ -42,7 +48,6 @@ class PostsEdit extends Component {
             Category: {this.props.post.category}
           </p>
           <button type="button" onClick={(a) => this.editPost()}>Save</button>
-
         </form>
       </div>
     );

@@ -4,11 +4,12 @@
   width: 650px;
 }
 .postListMain .theList li {
-  color: #908c78;
+  color: #586e75;
   background-color: #fdf6e3;
   padding: 15px;
   margin-bottom: 15px;
   border-radius: 5px;
+  width: 900px;
 }
 
 .postListMain button {
@@ -17,14 +18,14 @@
   margin: 10px;
   margin-right: 0px;
   /* background-color: #0066FF; */
-  background-color: #6c71c4;
+  background-color: #268bd2;
   color: #FFF;
-  border: 2px solid #6c71c4;
+  border: 2px solid #268bd2;
 }
 
 .postListMain button:hover {
-  background-color: #003399;
-  border: 2px solid #003399;
+  background-color: #6c71c4;
+  border: 2px solid #6c71c4;
   cursor: pointer;
 }
 
@@ -37,8 +38,14 @@
   padding: 10px;
   font-size: 16px;
   border: 2px solid #FFF;
-  width: 165px;
-  margin-left: 10px;
+  width: 665px;
+}
+
+.postListMain textarea {
+  padding: 10px;
+  font-size: 16px;
+  border: 2px solid #FFF;
+  width: 665px;
 }
 
 .postListMain select {
@@ -47,7 +54,6 @@
   border: 2px solid #FFF;
   height: 45px;
   width: 165px;
-  margin-left: 10px;
 }
 
 .container {

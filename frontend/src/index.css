@@ -2,9 +2,21 @@ body {
   padding: 50px;
   background-color: #eee8d5;
   font-family: sans-serif;
-  color: #908c78;
+  color: #586e75;
 }
 #root {
   display: flex;
-  justify-content: center;
+  justify-content: left;
+}
+
+a {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+a, a:visited{
+  color: 	#268bd2;
 }
