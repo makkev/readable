@@ -25,6 +25,7 @@ class PostsEdit extends Component {
             <div>Title:</div>
             <div>
               <input key={this.props.post.id}
+                autoFocus
                 ref={(a) => this._inputTitle = a}
                 type="text" placeholder="Title" 
                 defaultValue={this.props.post.title} />
