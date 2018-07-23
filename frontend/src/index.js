@@ -1,8 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
-import { BrowserRouter, Route } from 'react-router-dom';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import PostsList from './components/posts_list';
+import PostsListCategory from './components/posts_list_category';
 import PostsCreate from './components/posts_create';
 import PostsEdit from './components/posts_edit';
 import PostsDetail from './components/posts_detail';
@@ -24,7 +25,8 @@ ReactDOM.render(
     <BrowserRouter>
       <div>
         <Route exact path="/" component={PostsList} />
-        <Route path="/create" component={PostsCreate} />
+        <Route exact path="/:category" component={PostsListCategory} />
+        <Route path="/post/create" component={PostsCreate} />
         <Route path="/edit/:id" component={PostsEdit} />
         <Route path="/detail/:id" component={PostsDetail} />
 

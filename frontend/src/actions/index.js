@@ -36,6 +36,12 @@ export const fetchPost = () => dispatch => (
     .then(post => dispatch(receivePost(post)))
 );
 
+export const fetchPostCategory = (category) => dispatch => (
+  PostsAPI
+    .getCategory(category)
+    .then(post => dispatch(receivePost(post)))
+);
+
 export const receiveOnePost = post => ({
   type: RECEIVE_ONE_POST,
   post,

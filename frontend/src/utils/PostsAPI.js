@@ -16,6 +16,10 @@ export const getAll = () =>
   fetch(`${api}/posts`, { headers })
     .then(res => res.json());
 
+export const getCategory = category =>
+  fetch(`${api}/${category}/posts`, { headers })
+    .then(res => res.json());
+
 export const getPost = (id) =>
   fetch(`${api}/posts/${id}`, { headers })
     .then(res => res.json());
