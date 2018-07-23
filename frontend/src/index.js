@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { BrowserRouter, Route, } from 'react-router-dom';
 import PostsList from './components/posts_list';
 import PostsListCategory from './components/posts_list_category';
 import PostsCreate from './components/posts_create';

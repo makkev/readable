@@ -11,6 +11,7 @@ export const ADD_COMMENT = 'ADD_COMMENT';
 export const DELETE_COMMENT = 'DELETE_COMMENT';
 export const UPDATE_COMMENT = 'UPDATE_COMMENT';
 export const UPDATE_COMMENT_VOTE = 'UPDATE_COMMENT_VOTE';
+export const GET_CATEGORIES = 'GET_CATEGORIES';
 
 
 
@@ -38,7 +39,7 @@ export const fetchPost = () => dispatch => (
 
 export const fetchPostCategory = (category) => dispatch => (
   PostsAPI
-    .getCategory(category)
+    .getPostCategory(category)
     .then(post => dispatch(receivePost(post)))
 );
 
@@ -192,5 +193,16 @@ export const voteComment = (id, vote) =>
     PostsAPI
       .updateCommentVote(id, vote)
       .then(comment => dispatch(updateCommentVote(comment)));
+
+export const getCategories = (categories) => ({
+  type: GET_CATEGORIES,
+  categories,
+});
+
+export const listCategories = () =>
+  dispatch => 
+    PostsAPI
+      .getCategories()
+      .then(categories => dispatch(getCategories(categories)));
 
  

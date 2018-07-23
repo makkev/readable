@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { fetchPost,  fetchPostCategory } from '../actions';
+import { fetchPost, } from '../actions';
 import Post from './post';
 import '../readable.css';
 

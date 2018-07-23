@@ -16,7 +16,7 @@ export const getAll = () =>
   fetch(`${api}/posts`, { headers })
     .then(res => res.json());
 
-export const getCategory = category =>
+export const getPostCategory = category =>
   fetch(`${api}/${category}/posts`, { headers })
     .then(res => res.json());
 
@@ -115,5 +115,14 @@ export const updateCommentVote = (id, vote) => {
     },
     body: JSON.stringify(vote)
   }).then(res => res.json());
+}
 
+export const getCategories = () => {
+  return fetch(`${api}/categories`, {
+    method: 'GET',
+    headers: {
+      ...headers,
+      'Content-Type': 'application/json'
+    },
+  }).then(res => res.json());
 }

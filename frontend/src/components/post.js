@@ -2,13 +2,17 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { fetchPost, fetchPostCategory, addPost, postVote, removePost } from '../actions';
+import { fetchPost, fetchPostCategory, addPost, postVote, removePost, 
+  listCategories } from '../actions';
 import '../readable.css';
 
 const UPVOTE  = 'upVote';
 const DOWNVOTE  = 'downVote';
 
 class Post extends Component {
+  componentDidMount() {
+    this.props.listCategories();
+  }
   upVote(id) {
     this.props.postVote(id, { option: UPVOTE });
   }
@@ -18,18 +22,20 @@ class Post extends Component {
   }
 
   render() {
+    const { categories } = this.props;
+
     return (
       <div>
         <div className="header">
           <div className="page-head">Post List</div> 
           <div className="postListMain">
-            <div><Link to="/">All</Link></div>
-            <div><Link onClick={() => this.props.fetchPostCategory('react')} 
-              to="/react">React</Link></div>
-            <div><Link onClick={() => this.props.fetchPostCategory('redux')}
-              to="/redux">Redux</Link></div>
-            <div><Link onClick={() => this.props.fetchPostCategory('udacity')}
-              to="/udacity">Udacity</Link></div>
+            Category -&nbsp;
+            <Link onClick={() => this.props.fetchPost()} 
+              to={'/'}>[All] </Link>
+            {categories && Object.values(categories).map((cat) => 
+              <Link key={cat.name} onClick={() => this.props.fetchPostCategory(cat.path)} 
+                to={`/${cat.path}`}>[{cat.name}] </Link>
+            )}
             <p><Link 
               to="/post/create">Create New Post</Link></p>
           </div>
@@ -38,9 +44,9 @@ class Post extends Component {
           {Object.values(this.props.post).map(post => (
             <div key={post.id}>
               <li key={post.id}>
-                <div className="title">
-                  <div>
-                    <Link to={`/detail/${post.id}`}>
+                <div key={post.id} className="title">
+                  <div key={post.id}>
+                    <Link key={post.id} to={`/detail/${post.id}`}>
                       {post.title}
                     </Link>
                   </div>
@@ -71,9 +77,12 @@ class Post extends Component {
 
 
 function mapStateToProps(state) {
-  return { post: state.post };
+  return { 
+    post: state.post,
+    categories: state.categories,
+  }
 }
 
 export default connect(mapStateToProps,
-  { fetchPost, fetchPostCategory, addPost, postVote, removePost }
+  { fetchPost, fetchPostCategory, addPost, postVote, removePost, listCategories }
 )(Post);

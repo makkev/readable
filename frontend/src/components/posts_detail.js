@@ -64,7 +64,7 @@ class PostsDetail extends Component {
               onClick={() => this.upVote(this.props.post.id)}>+</button>
         </div>
         <br/>
-        <p><div className="page-head">Comments</div></p>
+        <div className="page-head">Comments</div>
         <hr/>
         <button className="buttons" onClick={(a) => this.renderNewComment() }>Add Comments</button>
 
@@ -105,7 +105,7 @@ class Comments extends Component {
         <ul className="theList">
           {Object.values(this.props.comments).map(comment => (
             <li key={comment.id}>
-              {comment.id == this.state.currentEditId ? 
+              {comment.id === this.state.currentEditId ? 
                 <div>
                   <p><input type="text" ref={(a) => this.body = a} defaultValue={comment.body} autoFocus /></p>
                   <div>by {comment.author}</div>
@@ -127,7 +127,7 @@ class Comments extends Component {
                       +
                     </button>
                   </div>
-                  <button onClick={() => this.props.removeComment(comment.id)} class="button-delete">Delete</button>
+                  <button onClick={() => this.props.removeComment(comment.id)} className="button-delete">Delete</button>
                   <button onClick={() => this.setEditingId(comment.id)} >Edit</button>
                 </div>
               }
@@ -178,7 +178,7 @@ class NewComment extends Component {
 function mapStateToProps(state) {
   return { 
     post: state.post,
-    comment: state.comment 
+    comment: state.comment, 
   };
 }
 

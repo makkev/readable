@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { addPost, createPost } from '../actions';
+import { addPost } from '../actions';
 
 class PostsCreate extends Component {
   createPost(e) {
@@ -18,28 +18,24 @@ class PostsCreate extends Component {
       <div className="postListMain">
         <div className="page-head">Post Create</div>
         <form>
-          <p>
-            <div>Title</div>
-            <div><input ref={(a) => this._inputTitle = a} type="text" placeholder="Title" /></div>
-          </p>
-          <p>
-            <div>Body:</div>
-            <div><textarea ref={(a) => this._inputBody = a} name="Text1" cols="40" rows="5" placeholder="Body"></textarea></div>
-          </p>
-          <p>
-            <div>Author:</div>
-            <div><input ref={(a) => this._inputAuthor = a} type="text" placeholder="Author" /></div>
-          </p>
-          <p>
-            <div> Category:</div>
-            <div>
-              <select ref={(a) => this._inputCategory = a} name="category" id="category">
-                <option value="react">react</option>
-                <option value="redux">redux</option>
-                <option value="udactiy">udacity</option>
-              </select>
-            </div>
-          </p>
+          <div>Title</div>
+          <div><input ref={(a) => this._inputTitle = a} type="text" placeholder="Title" /></div>
+          <p></p>
+          <div>Body:</div>
+          <div><textarea ref={(a) => this._inputBody = a} name="Text1" cols="40" rows="5" placeholder="Body"></textarea></div>
+          <p></p>
+          <div>Author:</div>
+          <div><input ref={(a) => this._inputAuthor = a} type="text" placeholder="Author" /></div>
+          <p></p>
+          <div> Category:</div>
+          <div>
+            <select ref={(a) => this._inputCategory = a} name="category" id="category">
+              <option value="react">react</option>
+              <option value="redux">redux</option>
+              <option value="udactiy">udacity</option>
+            </select>
+          </div>
+          <p></p>
           <button type="button" onClick={(a) => this.createPost()}>Save</button>
           <button type="button" onClick={(a) => window.location.assign('/')}>Cancel</button>
 

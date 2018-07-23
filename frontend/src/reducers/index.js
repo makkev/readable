@@ -10,6 +10,7 @@ import {
   DELETE_COMMENT,
   UPDATE_COMMENT,
   UPDATE_COMMENT_VOTE,
+  GET_CATEGORIES,
   } from '../actions';
 
 const arrayToObject = (array, keyField) =>
@@ -21,6 +22,17 @@ const arrayToObject = (array, keyField) =>
 const objectMinusRecDeleted = (object, key) => {
   const { [key]: deletedObject, ...otherObjects } = object;
   return otherObjects;
+}
+function categories(state = {}, action) {
+  switch (action.type) {
+    case GET_CATEGORIES:
+      return { ...state, ...action.categories.categories };
+ 
+    default:
+      return state;
+
+  }
+
 }
 
 function post(state = {}, action) {
@@ -39,7 +51,6 @@ function post(state = {}, action) {
     case DELETE_POST:
       return objectMinusRecDeleted(state, action.post.id);
 
- 
     default:
       return state;
   }
@@ -76,4 +87,5 @@ function comment(state = {}, action) {
 export default combineReducers({
  post, 
  comment,
+ categories,
 });
