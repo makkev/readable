@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { fetchPost, fetchPostCategory, addPost, postVote, removePost, 
-  listCategories } from '../actions';
+  listCategories, sortPost, } from '../actions';
 import '../readable.css';
 
 const UPVOTE  = 'upVote';
@@ -23,6 +23,7 @@ class Post extends Component {
 
   render() {
     const { categories } = this.props;
+                
 
     return (
       <div>
@@ -30,14 +31,27 @@ class Post extends Component {
           <div className="page-head">Post List</div> 
           <div className="postListMain">
             Category -&nbsp;
-            <Link onClick={() => this.props.fetchPost()} 
-              to={'/'}>[All] </Link>
+            <Link onClick={() => this.props.fetchPost()} to={'/'}>[All] </Link>
             {categories && Object.values(categories).map((cat) => 
-              <Link key={cat.name} onClick={() => this.props.fetchPostCategory(cat.path)} 
-                to={`/${cat.path}`}>[{cat.name}] </Link>
+              <Link key={cat.name} 
+                onClick={() => this.props.fetchPostCategory(cat.path)} 
+                to={`/${cat.path}`}>[{cat.name}] 
+              </Link>
             )}
-            <p><Link 
-              to="/post/create">Create New Post</Link></p>
+            <div> Sort By: &nbsp;
+              <select 
+                onChange={e => this.props.sortPost(e.target.value)}
+                name="sortby" 
+                id="sortby"
+              >
+                <option value="timestamp">Date</option>
+                <option value="voteScore">Vote Score</option>
+                <option value="category">Category</option>
+              </select>
+            </div>
+            <p>
+              <Link to="/post/create">Create New Post</Link>
+            </p>
           </div>
         </div>
         <ul className="theList">
@@ -84,5 +98,7 @@ function mapStateToProps(state) {
 }
 
 export default connect(mapStateToProps,
-  { fetchPost, fetchPostCategory, addPost, postVote, removePost, listCategories }
+  { fetchPost, fetchPostCategory, addPost, postVote,
+    removePost, listCategories, sortPost,
+  }
 )(Post);

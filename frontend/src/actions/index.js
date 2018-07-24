@@ -12,6 +12,7 @@ export const DELETE_COMMENT = 'DELETE_COMMENT';
 export const UPDATE_COMMENT = 'UPDATE_COMMENT';
 export const UPDATE_COMMENT_VOTE = 'UPDATE_COMMENT_VOTE';
 export const GET_CATEGORIES = 'GET_CATEGORIES';
+export const SORT_POST = 'SORT_POST';
 
 
 
@@ -204,5 +205,10 @@ export const listCategories = () =>
     PostsAPI
       .getCategories()
       .then(categories => dispatch(getCategories(categories)));
+
+export const sortPost = (sortBy) => ({
+  type: SORT_POST,
+  sortBy,
+});
 
  
