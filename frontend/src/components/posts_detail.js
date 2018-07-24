@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 // import Comments from './comments';
 import { getPost, editPost, postVoteDetail, listComments,
-  postComment, removeComment, editComment, voteComment } from '../actions';
+  postComment, removeComment, editComment, voteComment, removePost } from '../actions';
+import { Link } from 'react-router-dom';
 
 const UPVOTE = 'upVote';
 const DOWNVOTE = 'downVote';
@@ -45,11 +46,23 @@ class PostsDetail extends Component {
     this.props.postVoteDetail(id, { option: DOWNVOTE });
   }
 
+  deletePost() {
+    this.props.removePost(this.props.post.id)
+    window.location.assign('/');
+  }
+
   render() {
     return (
       <div className="postListMain">
-        <div className="page-head">Post Details</div>
+        <div className="page-head">
+          <Link to="/">Readable</Link>
+            &nbsp;- Post Details
+        </div>
         <hr/>
+        <Link to={`/edit/${this.props.post.id}`}>
+          Edit Post
+        </Link>
+        <button onClick={() => this.deletePost()}>Delete Post</button>
         <div className="title">
           <p>{this.props.post.title}</p>
         </div>
@@ -73,6 +86,7 @@ class PostsDetail extends Component {
             unrenderNewComment={this.unrenderNewComment} 
             postComment={this.props.postComment}
             postId={this.props.post.id}
+            getPost={this.props.getPost}
           /> : null}
         <Comments 
           comments={this.props.comment}
@@ -147,6 +161,10 @@ class NewComment extends Component {
       parentId: this.props.postId,
     });
     this.props.unrenderNewComment()
+    // refresh to get updated comments count
+    this.props.getPost(this.props.postId);
+
+    console.log(this.props.post);
 
   }
   render() {
@@ -184,5 +202,5 @@ function mapStateToProps(state) {
 
 export default connect(mapStateToProps,
   { getPost, editPost, postVoteDetail, listComments,
-    postComment, removeComment, editComment, voteComment  })(PostsDetail);
+    postComment, removeComment, editComment, voteComment, removePost })(PostsDetail);
 

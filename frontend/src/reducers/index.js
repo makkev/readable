@@ -14,6 +14,9 @@ import {
   SORT_POST,
   } from '../actions';
 
+const DEFAULT_SORT = 'timestamp';
+
+
 const arrayToObject = (array, keyField) =>
    array.reduce((obj, item) => {
      obj[item[keyField]] = item
@@ -36,7 +39,6 @@ const compareValues = (key, order='desc') => {
         a[key].toUpperCase() : a[key];
       const varB = (typeof b[key] === 'string') ? 
         b[key].toUpperCase() : b[key];
-
 
       let comparison = 0;
       if (varA > varB) {
@@ -65,7 +67,10 @@ function categories(state = {}, action) {
 function post(state = {}, action) {
   switch (action.type) {
     case RECEIVE_POST:
-      return arrayToObject(action.post, 'id');
+      // return arrayToObject(action.post, 'id');
+      const sorted = [ ...action.post].sort(compareValues(DEFAULT_SORT, 'desc')) ;
+      const sortedObj = arrayToObject(sorted, 'id');
+      return sortedObj;
     case RECEIVE_ONE_POST:
       return action.post;
     case UPDATE_POST_VOTE:

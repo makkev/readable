@@ -28,14 +28,17 @@ class Post extends Component {
     return (
       <div>
         <div className="header">
-          <div className="page-head">Post List</div> 
+          <div className="page-head">
+              <Link to="/">Readable</Link>
+              &nbsp;- Post List
+          </div>
           <div className="postListMain">
             Category -&nbsp;
             <Link onClick={() => this.props.fetchPost()} to={'/'}>[All] </Link>
             {categories && Object.values(categories).map((cat) => 
               <Link key={cat.name} 
                 onClick={() => this.props.fetchPostCategory(cat.path)} 
-                to={`/${cat.path}`}>[{cat.name}] 
+                to={`/${cat.path}`}>[{cat.name}]&nbsp; 
               </Link>
             )}
             <div> Sort By: &nbsp;
@@ -46,7 +49,6 @@ class Post extends Component {
               >
                 <option value="timestamp">Date</option>
                 <option value="voteScore">Vote Score</option>
-                <option value="category">Category</option>
               </select>
             </div>
             <p>
@@ -60,7 +62,7 @@ class Post extends Component {
               <li key={post.id}>
                 <div key={post.id} className="title">
                   <div key={post.id}>
-                    <Link key={post.id} to={`/detail/${post.id}`}>
+                    <Link key={post.id} to={`/${post.category}/${post.id}`}>
                       {post.title}
                     </Link>
                   </div>

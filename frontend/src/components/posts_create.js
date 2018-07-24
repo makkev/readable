@@ -1,8 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { addPost } from '../actions';
+import { addPost, listCategories } from '../actions';
+import { Link } from 'react-router-dom';
 
 class PostsCreate extends Component {
+  componentDidMount() {
+    this.props.listCategories();
+  }
   createPost(e) {
     const thePost = {
       title: this._inputTitle.value,
@@ -14,9 +18,14 @@ class PostsCreate extends Component {
     window.location.assign('/');
   }
   render() {
+    const { categories } = this.props;
     return (
       <div className="postListMain">
-        <div className="page-head">Post Create</div>
+        <div className="page-head">
+            <Link to="/">Readable</Link>
+            &nbsp;- Create Post
+        </div>
+        <p></p>
         <form>
           <div>Title</div>
           <div><input ref={(a) => this._inputTitle = a} type="text" placeholder="Title" /></div>
@@ -30,9 +39,10 @@ class PostsCreate extends Component {
           <div> Category:</div>
           <div>
             <select ref={(a) => this._inputCategory = a} name="category" id="category">
-              <option value="react">react</option>
-              <option value="redux">redux</option>
-              <option value="udactiy">udacity</option>
+              {categories && Object.values(categories).map((cat) => 
+                <option key={cat.path} value={cat.path}>{cat.path}</option>
+
+              )}
             </select>
           </div>
           <p></p>
@@ -45,4 +55,10 @@ class PostsCreate extends Component {
   }
 }
 
-export default connect(null, { addPost })(PostsCreate);
+function mapStateToProps(state) {
+  return { 
+    categories: state.categories,
+  }
+}
+
+export default connect(mapStateToProps, { addPost, listCategories })(PostsCreate);

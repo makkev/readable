@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { getPost, editPost } from '../actions';
+import { Link } from 'react-router-dom';
 
 class PostsEdit extends Component {
   componentDidMount() {
@@ -19,7 +20,10 @@ class PostsEdit extends Component {
   render() {
     return (
       <div className="postListMain">
-        <h3>Edit Post</h3>
+        <div className="page-head">
+            <Link to="/">Readable</Link>
+            &nbsp;- Edit Post
+        </div>
         <form>
           <p>
             <div>Title:</div>
@@ -51,6 +55,7 @@ class PostsEdit extends Component {
             Category: {this.props.post.category}
           </p>
           <button type="button" onClick={(a) => this.editPost()}>Save</button>
+          <button type="button" onClick={(a) => window.location.assign('/')}>Cancel</button>
         </form>
       </div>
     );
