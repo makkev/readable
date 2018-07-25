@@ -93,6 +93,8 @@ class PostsDetail extends Component {
           removeComment={this.props.removeComment}
           editComment={this.props.editComment}
           voteComment={this.props.voteComment}
+          removeComment={this.props.removeComment}
+          getPost={this.props.getPost}
         />
 
 
@@ -141,7 +143,12 @@ class Comments extends Component {
                       +
                     </button>
                   </div>
-                  <button onClick={() => this.props.removeComment(comment.id)} className="button-delete">Delete</button>
+                  <button 
+                    onClick={() => this.props.removeComment(comment.id)
+                      .then(data => this.props.getPost(data.comment.parentId))}
+                      className="button-delete">
+                    Delete
+                  </button>
                   <button onClick={() => this.setEditingId(comment.id)} >Edit</button>
                 </div>
               }
@@ -163,8 +170,6 @@ class NewComment extends Component {
     this.props.unrenderNewComment()
     // refresh to get updated comments count
     this.props.getPost(this.props.postId);
-
-    console.log(this.props.post);
 
   }
   render() {
