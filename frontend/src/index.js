@@ -6,6 +6,7 @@ import PostsListCategory from './components/posts_list_category';
 import PostsCreate from './components/posts_create';
 import PostsEdit from './components/posts_edit';
 import PostsDetail from './components/posts_detail';
+import Error404 from './components/error_page';
 import { createStore, applyMiddleware, compose  }  from 'redux';
 import reducer from './reducers';
 import { Provider } from 'react-redux'

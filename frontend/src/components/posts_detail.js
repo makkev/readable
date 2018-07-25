@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { getPost, editPost, postVoteDetail, listComments,
   postComment, removeComment, editComment, voteComment, removePost } from '../actions';
 import { Link } from 'react-router-dom';
+import Error404 from './error_page'
 
 const UPVOTE = 'upVote';
 const DOWNVOTE = 'downVote';
@@ -53,52 +54,54 @@ class PostsDetail extends Component {
 
   render() {
     return (
-      <div className="postListMain">
-        <div className="page-head">
-          <Link to="/">Readable</Link>
-            &nbsp;- Post Details
-        </div>
-        <hr/>
-        <Link to={`/edit/${this.props.post.id}`}>
-          Edit Post
-        </Link>
-        <button onClick={() => this.deletePost()}>Delete Post</button>
-        <div className="title">
-          <p>{this.props.post.title}</p>
-        </div>
-        <p>by {this.props.post.author}</p>
-        <p>[Category: {this.props.post.category}] [Comments: {this.props.post.commentCount}] </p>
-        <p>{this.props.post.body}</p>
-        <div className="container">
-          <button className="button-vote"
-            onClick={() => this.downVote(this.props.post.id)}>-</button>
-          <span>Votes: {this.props.post.voteScore}</span>
-          <button className="button-vote"
-              onClick={() => this.upVote(this.props.post.id)}>+</button>
-        </div>
-        <br/>
-        <div className="page-head">Comments</div>
-        <hr/>
-        <button className="buttons" onClick={(a) => this.renderNewComment() }>Add Comments</button>
+      (!this.props.post.id ? <Error404 /> : 
+        <div className="postListMain">
+          <div className="page-head">
+            <Link to="/">Readable</Link>
+              &nbsp;- Post Details
+          </div>
+          <hr/>
+          <Link to={`/edit/${this.props.post.id}`}>
+            Edit Post
+          </Link>
+          <button onClick={() => this.deletePost()}>Delete Post</button>
+          <div className="title">
+            <p>{this.props.post.title}</p>
+          </div>
+          <p>by {this.props.post.author}</p>
+          <p>[Category: {this.props.post.category}] [Comments: {this.props.post.commentCount}] </p>
+          <p>{this.props.post.body}</p>
+          <div className="container">
+            <button className="button-vote"
+              onClick={() => this.downVote(this.props.post.id)}>-</button>
+            <span>Votes: {this.props.post.voteScore}</span>
+            <button className="button-vote"
+                onClick={() => this.upVote(this.props.post.id)}>+</button>
+          </div>
+          <br/>
+          <div className="page-head">Comments</div>
+          <hr/>
+          <button className="buttons" onClick={(a) => this.renderNewComment() }>Add Comments</button>
 
-        {this.state.showNewComment ? 
-          <NewComment 
-            unrenderNewComment={this.unrenderNewComment} 
-            postComment={this.props.postComment}
-            postId={this.props.post.id}
+          {this.state.showNewComment ? 
+            <NewComment 
+              unrenderNewComment={this.unrenderNewComment} 
+              postComment={this.props.postComment}
+              postId={this.props.post.id}
+              getPost={this.props.getPost}
+            /> : null}
+          <Comments 
+            comments={this.props.comment}
+            removeComment={this.props.removeComment}
+            editComment={this.props.editComment}
+            voteComment={this.props.voteComment}
+            removeComment={this.props.removeComment}
             getPost={this.props.getPost}
-          /> : null}
-        <Comments 
-          comments={this.props.comment}
-          removeComment={this.props.removeComment}
-          editComment={this.props.editComment}
-          voteComment={this.props.voteComment}
-          removeComment={this.props.removeComment}
-          getPost={this.props.getPost}
-        />
+          />
 
 
-      </div>
+        </div>
+      )
     );
   };
 }
